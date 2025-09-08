@@ -13,7 +13,7 @@ mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(() => console.log("MongoDB Connected"))
-  .catch(err => console.log(err));
+  .catch(err => console.log('Erro',err));
 
 // Schemas
 const houseSchema = new mongoose.Schema({
