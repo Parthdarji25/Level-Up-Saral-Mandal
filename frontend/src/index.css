@@ -1,0 +1,628 @@
+/* ========================
+   Global Styles
+======================== */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(
+    135deg,
+    #0f2027,
+    #203a43,
+    #2c5364
+  ); /* space gradient */
+  color: #f0f0f0;
+  transition: background 0.5s ease;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* ========================
+   Header - Logos and Auth Button
+======================== */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 15px 20px;
+  background: linear-gradient(90deg, #1f1c2c, #928dab);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Auth button top-right */
+.auth-btn-container {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  z-index: 10;
+}
+
+.login-btn {
+  background: linear-gradient(135deg, #f7971e, #ffd200);
+  color: #000;
+  font-weight: bold;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.5);
+}
+
+/* Logo row (desktop) */
+.logo-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: -35px;
+}
+
+/* Side logos - BIG & simple */
+.side-logo {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+}
+
+/* Main logo - medium size */
+.main-logo {
+  width: 75px;
+  height: 100px;
+  object-fit: contain;
+}
+
+/* Center text */
+.center-text {
+  text-align: center;
+  margin-top: 5px;
+}
+
+.center-text h1 {
+  margin: 2px 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffd700;
+  text-shadow: 0 0 8px #ffd700;
+}
+
+.center-text h2 {
+  margin: 2px 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #ff4500;
+  text-shadow: 0 0 8px #ff6347;
+  animation: fireText 1.5s infinite alternate;
+}
+
+.center-text p {
+  margin: 0;
+  font-size: 16px;
+  color: #fff;
+}
+
+/* Fire animation for Level Up */
+@keyframes fireText {
+  0% {
+    text-shadow: 0 0 5px #ff4500, 0 0 10px #ff6347;
+    color: #ff6347;
+  }
+  50% {
+    text-shadow: 0 0 10px #ff6347, 0 0 15px #ff4500;
+    color: #ff4500;
+  }
+  100% {
+    text-shadow: 0 0 15px #ff6347, 0 0 20px #ff4500;
+    color: #ff6347;
+  }
+}
+
+/* ========================
+   Responsive Design (Mobile)
+======================== */
+@media (max-width: 768px) {
+  /* Make all logos in one row */
+  .logo-row {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: -25px;
+    gap: 10px;
+    padding: 0 20px;
+  }
+
+  .side-logo {
+    width: 100%;
+    height: 250px;
+    object-fit: contain;
+  }
+
+  .main-logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+  }
+
+  /* Center text below main logo */
+  .center-text {
+    margin-top: 5px;
+  }
+
+  .center-text h1 {
+    font-size: 22px;
+  }
+  .center-text h2 {
+    font-size: 18px;
+  }
+  .center-text p {
+    font-size: 14px;
+  }
+
+  /* Auth button stays top-right */
+  .auth-btn-container {
+    top: 10px;
+    right: 10px;
+  }
+}
+
+/* ========================
+   Tabs
+======================== */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.tabs a {
+  padding: 8px 14px;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: #fff;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: 0.3s all;
+}
+
+.tabs a:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.5);
+}
+
+/* ========================
+   Dashboard & House Points Cards
+======================== */
+.dashboard,
+.house-points {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.house-card,
+.player-activities,
+form {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
+  padding: 15px;
+  min-width: 220px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  animation: fadeInUp 1s ease forwards;
+}
+
+.house-card:hover,
+.player-activities:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+.house-card img,
+.player-activities img {
+  width: 70px;
+  margin-bottom: 8px;
+}
+
+.house-card h3 {
+  margin: 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.house-card p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+/* ========================
+   Player Activities List
+======================== */
+.player-activities ul {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0;
+}
+
+.player-activities li {
+  background: rgba(255, 255, 255, 0.1);
+  margin: 4px 0;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.player-activities li:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* AdminCRUD styles */
+.admin-crud-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.admin-crud-form .error {
+  color: #ff6b6b;
+  font-weight: 500;
+  text-align: center;
+}
+
+.dropdown {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  color: black; /* ✅ dropdown text black */
+  font-size: 14px;
+}
+
+.dropdown-option {
+  color: black; /* ✅ all options readable */
+}
+
+.input-points {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  color: black;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #f7971e, #ffd200);
+  color: #000;
+  font-weight: bold;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.5);
+}
+
+/* ========================
+   Forms (Login / AdminCRUD)
+======================== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+form input,
+form select {
+  padding: 8px 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+form input::placeholder {
+  color: #ccc;
+}
+
+form button {
+  width: fit-content;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #f7971e, #ffd200);
+  color: #000;
+  font-weight: 600;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+form button:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.5);
+}
+
+/* ========================
+   Login Modal
+======================== */
+.modal-backdrop,
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s;
+}
+
+.modal {
+  background: rgba(0, 0, 0, 0.95);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.7);
+  min-width: 300px;
+  max-width: 400px;
+  color: #fff;
+  text-align: center;
+}
+
+.close-btn {
+  margin-top: 10px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #89f7fe, #66a6ff);
+  color: white;
+  cursor: pointer;
+}
+.close-btn:hover {
+  background: linear-gradient(135deg, #66a6ff, #89f7fe);
+}
+
+/* ========================
+   House Points Specific
+======================== */
+.house-list button {
+  background: linear-gradient(135deg, #ff6a00, #ee0979);
+  color: #fff;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.house-list button:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.6);
+}
+
+.house-details {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
+  animation: fadeInUp 0.8s ease forwards;
+  max-width: 600px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+/* ========================
+   House Points Specific (Desktop)
+======================== */
+.house-list {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.house-list button {
+  padding: 10px 18px;
+  font-size: 15px;
+}
+
+.house-details {
+  margin: 0 auto; /* Center horizontally */
+  max-width: 800px; /* Wider for desktop readability */
+  width: 90%; /* Allow some breathing space */
+  background: rgba(255, 255, 255, 0.05);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+/* Total points styling */
+.house-details .house-total,
+.modal .modal-total {
+  font-weight: 700;
+  font-size: 18px;
+  color: #ffd700;
+  margin: 10px 0;
+}
+
+/* Coaches and mentors non-clickable */
+.house-details h4 + ul li {
+  cursor: default;
+}
+
+/* Players clickable */
+.clickable-player {
+  background: linear-gradient(135deg, #2196f3, #21cbf3);
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  padding: 6px 12px;
+  border-radius: 6px;
+  margin: 4px 0;
+}
+
+.clickable-player:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.5);
+}
+
+/* Player activities panel */
+.player-activities {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
+  animation: fadeIn 0.5s ease forwards;
+}
+
+/* ========================
+   Coaches & Mentors Line View (Desktop)
+======================== */
+.house-details .inline-list {
+  display: block;
+  font-size: 15px;
+  margin: 10px 0;
+  line-height: 1.6;
+}
+
+.house-details .inline-list span {
+  font-weight: bold;
+  margin-right: 6px;
+}
+
+@media (max-width: 768px) {
+  .house-details .inline-list {
+    display: block;
+    text-align: left;
+  }
+}
+
+/* ========================
+   Animations
+======================== */
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ========================
+   Responsive Design
+======================== */
+/* ========================
+   Responsive Design
+======================== */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  /* House cards and player activities */
+  .house-card,
+  .player-activities,
+  form {
+    min-width: 90%; /* Full width with padding */
+    margin: 10px auto;
+  }
+
+  /* Tabs mobile-friendly */
+  .tabs {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .tabs a {
+    width: 90%; /* Fit screen width */
+    text-align: center;
+    padding: 10px 0;
+    font-size: 16px;
+  }
+
+  /* House details */
+  .house-details {
+    width: 95%;
+    padding: 15px;
+  }
+
+  /* Modal */
+  .modal {
+    width: 95%;
+  }
+}
