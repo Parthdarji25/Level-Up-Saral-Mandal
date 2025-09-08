@@ -16,10 +16,10 @@ export default function AdminCRUD() {
 
   const fetchData = async () => {
     try {
-      const housesRes = await axios.get("http://localhost:5000/api/houses");
+      const housesRes = await axios.get("https://level-up-saral-mandal.onrender.com/api/houses");
       setHouses(housesRes.data);
 
-      const activitiesRes = await axios.get("http://localhost:5000/api/activities");
+      const activitiesRes = await axios.get("https://level-up-saral-mandal.onrender.com/api/activities");
       setActivities(activitiesRes.data);
     } catch (err) {
       console.error("Error fetching data:", err);
@@ -30,7 +30,7 @@ export default function AdminCRUD() {
   useEffect(() => {
     if (form.house) {
       axios
-        .get(`http://localhost:5000/api/house/${form.house}/players`)
+        .get(`https://level-up-saral-mandal.onrender.com/api/house/${form.house}/players`)
         .then((res) => setPlayers(res.data))
         .catch((err) => console.error(err));
     } else {
@@ -49,7 +49,7 @@ export default function AdminCRUD() {
     setError("");
 
     try {
-      await axios.post("http://localhost:5000/api/points", form);
+      await axios.post("https://level-up-saral-mandal.onrender.com/api/points", form);
       alert("✅ Points updated successfully!");
 
       // Refresh data so HousePoints sees updates

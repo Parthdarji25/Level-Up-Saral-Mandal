@@ -6,7 +6,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/houses")
+      .get("https://level-up-saral-mandal.onrender.com/api/houses")
       .then((res) => setHouses(res.data))
       .catch((err) => console.error("Error fetching houses:", err));
   }, []);

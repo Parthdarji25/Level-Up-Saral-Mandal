@@ -8,7 +8,7 @@ export default function Login({ onLogin, onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/login", form);
+      const res = await axios.post("https://level-up-saral-mandal.onrender.com/api/login", form);
       onLogin(res.data.token);
     } catch (err) {
       alert("Login failed");

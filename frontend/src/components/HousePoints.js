@@ -12,7 +12,7 @@ export default function HousePoints() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/houses")
+      .get("https://level-up-saral-mandal.onrender.com/api/houses")
       .then((res) => setHouses(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -22,7 +22,7 @@ export default function HousePoints() {
     setShowModal(true);
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/player/${encodeURIComponent(
+        `https://level-up-saral-mandal.onrender.com/api/player/${encodeURIComponent(
           playerName
         )}/activities`
       );
