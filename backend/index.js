@@ -9,11 +9,13 @@ app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}).then(() => console.log("MongoDB Connected"))
-  .catch(err => console.log('Erro',err));
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("MongoDB Connected"))
+  .catch((err) => console.log("Erro", err));
 
 // Schemas
 const houseSchema = new mongoose.Schema({
@@ -34,8 +36,9 @@ const Activity = mongoose.model("Activity", activitySchema);
 const playerActivitySchema = new mongoose.Schema({
   player: String,
   house: String,
-  activity: String, // store activity name
-  points: Number,   // allow negative too
+  activity: String,
+  points: Number,
+  bonus: { type: Number, default: 0 }, // new optional field
   date: { type: Date, default: Date.now },
 });
 const PlayerActivity = mongoose.model("PlayerActivity", playerActivitySchema);
@@ -87,7 +90,9 @@ app.get("/api/house/:name/players", async (req, res) => {
 // Get activities for a player + total points
 app.get("/api/player/:name/activities", async (req, res) => {
   try {
-    const activities = await PlayerActivity.find({ player: req.params.name }).sort({ date: -1 });
+    const activities = await PlayerActivity.find({
+      player: req.params.name,
+    }).sort({ date: -1 });
     const totalPoints = activities.reduce((sum, a) => sum + a.points, 0);
     res.json({ activities, totalPoints });
   } catch (err) {
@@ -159,7 +164,10 @@ app.post("/api/login", async (req, res) => {
   if (!valid) return res.status(400).json({ error: "Invalid password" });
 
   const jwt = require("jsonwebtoken");
-  const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET);
+  const token = jwt.sign(
+    { id: user._id, role: user.role },
+    process.env.JWT_SECRET
+  );
   res.json({ token });
 });
 

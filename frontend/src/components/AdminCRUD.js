@@ -1,4 +1,3 @@
-// src/components/AdminCRUD.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -6,31 +5,41 @@ export default function AdminCRUD() {
   const [houses, setHouses] = useState([]);
   const [players, setPlayers] = useState([]);
   const [activities, setActivities] = useState([]);
-  const [form, setForm] = useState({ house: "", player: "", activity: "", points: "" });
+  const [form, setForm] = useState({
+    house: "",
+    player: "",
+    activity: "",
+    points: "",
+    bonus: "",
+  });
   const [error, setError] = useState("");
 
-  // Fetch houses & activities on load
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
     try {
-      const housesRes = await axios.get("https://level-up-saral-mandal.onrender.com/api/houses");
+      const housesRes = await axios.get(
+        "https://level-up-saral-mandal.onrender.com/api/houses"
+      );
       setHouses(housesRes.data);
 
-      const activitiesRes = await axios.get("https://level-up-saral-mandal.onrender.com/api/activities");
+      const activitiesRes = await axios.get(
+        "https://level-up-saral-mandal.onrender.com/api/activities"
+      );
       setActivities(activitiesRes.data);
     } catch (err) {
       console.error("Error fetching data:", err);
     }
   };
 
-  // Fetch players when house changes
   useEffect(() => {
     if (form.house) {
       axios
-        .get(`https://level-up-saral-mandal.onrender.com/api/house/${form.house}/players`)
+        .get(
+          `https://level-up-saral-mandal.onrender.com/api/house/${form.house}/players`
+        )
         .then((res) => setPlayers(res.data))
         .catch((err) => console.error(err));
     } else {
@@ -38,25 +47,43 @@ export default function AdminCRUD() {
     }
   }, [form.house]);
 
+  const handleActivityChange = (activityName) => {
+    const activity = activities.find((a) => a.name === activityName);
+    setForm({
+      ...form,
+      activity: activityName,
+      points: activity ? activity.points : "",
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validation
-    if (!form.house || !form.player || !form.activity || !form.points) {
-      setError("⚠️ Please fill all fields before submitting.");
+    if (!form.house || !form.player || !form.activity) {
+      setError("⚠️ Please fill all required fields before submitting.");
       return;
     }
+
     setError("");
 
     try {
-      await axios.post("https://level-up-saral-mandal.onrender.com/api/points", form);
+      // total points = activity points + optional bonus
+      const totalPoints = parseInt(form.points) + (parseInt(form.bonus) || 0);
+
+      await axios.post(
+        "https://level-up-saral-mandal.onrender.com/api/points",
+        {
+          player: form.player,
+          house: form.house,
+          activity: form.activity,
+          points: totalPoints,
+          bonus: parseInt(form.bonus) || 0,
+        }
+      );
+
       alert("✅ Points updated successfully!");
-
-      // Refresh data so HousePoints sees updates
       fetchData();
-
-      // Reset form
-      setForm({ house: "", player: "", activity: "", points: "" });
+      setForm({ house: "", player: "", activity: "", points: "", bonus: "" });
     } catch (err) {
       console.error("Error updating points:", err);
       setError("❌ Failed to update points.");
@@ -67,7 +94,6 @@ export default function AdminCRUD() {
     <form onSubmit={handleSubmit} className="admin-crud-form">
       {error && <p className="error">{error}</p>}
 
-      {/* House dropdown */}
       <select
         value={form.house}
         onChange={(e) => setForm({ ...form, house: e.target.value })}
@@ -75,13 +101,12 @@ export default function AdminCRUD() {
       >
         <option value="">Select House</option>
         {houses.map((h) => (
-          <option key={h.name} value={h.name} className="dropdown-option">
+          <option key={h.name} value={h.name}>
             {h.name}
           </option>
         ))}
       </select>
 
-      {/* Player dropdown */}
       <select
         value={form.player}
         onChange={(e) => setForm({ ...form, player: e.target.value })}
@@ -89,33 +114,44 @@ export default function AdminCRUD() {
       >
         <option value="">Select Player</option>
         {players.map((p) => (
-          <option key={p} value={p} className="dropdown-option">
+          <option key={p} value={p}>
             {p}
           </option>
         ))}
       </select>
 
-      {/* Activity dropdown */}
       <select
         value={form.activity}
-        onChange={(e) => setForm({ ...form, activity: e.target.value })}
+        onChange={(e) => handleActivityChange(e.target.value)}
         className="dropdown"
       >
         <option value="">Select Activity</option>
         {activities.map((a) => (
-          <option key={a.name} value={a.name} className="dropdown-option">
+          <option key={a.name} value={a.name}>
             {a.name}
           </option>
         ))}
       </select>
 
-      {/* Points input */}
       <input
         type="number"
-        placeholder="Enter points"
+        placeholder="Points (auto-filled)"
         value={form.points}
-        onChange={(e) => setForm({ ...form, points: parseInt(e.target.value) || "" })}
+        onChange={(e) =>
+          setForm({ ...form, points: parseInt(e.target.value) || "" })
+        }
+        readOnly // make it non-editable
         className="input-points"
+      />
+
+      <input
+        type="number"
+        placeholder="Bonus points (optional)"
+        value={form.bonus}
+        onChange={(e) =>
+          setForm({ ...form, bonus: parseInt(e.target.value) || "" })
+        }
+        className="input-bonus"
       />
 
       <button type="submit" className="submit-btn">
