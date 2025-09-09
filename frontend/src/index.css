@@ -26,25 +26,25 @@ ul {
 }
 
 /* ========================
-   Header - Logos and Auth Button
+   Header & Auth Button
 ======================== */
 .header {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  position: relative;
   padding: 15px 20px;
   background: linear-gradient(90deg, #1f1c2c, #928dab);
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+  min-height: 220px;
+  overflow: hidden;
 }
 
-/* Auth button top-right */
 .auth-btn-container {
   position: absolute;
   top: 15px;
   right: 20px;
-  z-index: 10;
+  z-index: 999; /* topmost */
 }
 
 .login-btn {
@@ -57,29 +57,37 @@ ul {
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
 .login-btn:hover {
   transform: scale(1.05);
   box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.5);
 }
 
-/* Logo row (desktop) */
+/* ========================
+   Header Content
+======================== */
+.header-content {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Logo row */
 .logo-row {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 30px;
-  margin-bottom: -35px;
+  margin-bottom: -45px;
 }
 
-/* Side logos - BIG & simple */
 .side-logo {
   width: 100%;
   height: 200px;
   object-fit: contain;
 }
 
-/* Main logo - medium size */
 .main-logo {
   width: 75px;
   height: 100px;
@@ -91,7 +99,6 @@ ul {
   text-align: center;
   margin-top: 5px;
 }
-
 .center-text h1 {
   margin: 2px 0;
   font-size: 28px;
@@ -99,7 +106,6 @@ ul {
   color: #ffd700;
   text-shadow: 0 0 8px #ffd700;
 }
-
 .center-text h2 {
   margin: 2px 0;
   font-size: 20px;
@@ -108,29 +114,27 @@ ul {
   text-shadow: 0 0 8px #ff6347;
   animation: fireText 1.5s infinite alternate;
 }
-
 .center-text p {
   margin: 0;
   font-size: 16px;
   color: #fff;
 }
 
-/* Fire animation for Level Up */
+/* Fire animation */
 @keyframes fireText {
   0% {
-    text-shadow: 0 0 5px #ff4500, 0 0 10px #ff6347;
     color: #ff6347;
+    text-shadow: 0 0 5px #ff4500, 0 0 10px #ff6347;
   }
   50% {
-    text-shadow: 0 0 10px #ff6347, 0 0 15px #ff4500;
     color: #ff4500;
+    text-shadow: 0 0 10px #ff6347, 0 0 15px #ff4500;
   }
   100% {
-    text-shadow: 0 0 15px #ff6347, 0 0 20px #ff4500;
     color: #ff6347;
+    text-shadow: 0 0 15px #ff6347, 0 0 20px #ff4500;
   }
 }
-
 /* ========================
    Responsive Design (Mobile)
 ======================== */
@@ -624,5 +628,150 @@ form button:hover {
   /* Modal */
   .modal {
     width: 95%;
+  }
+}
+
+/* ========================
+   Space background & planets
+======================== */
+.space-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* behind content */
+  pointer-events: none;
+}
+
+/* Stars */
+.star {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: twinkle 2s infinite alternate;
+}
+@keyframes twinkle {
+  0% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+}
+
+/* Planets base */
+.planet {
+  position: absolute;
+  border-radius: 50%;
+  animation: float 20s linear infinite;
+  opacity: 0.9;
+}
+@keyframes float {
+  0% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-20px) translateX(20px) rotate(360deg);
+  }
+}
+
+/* Specific planets */
+.saturn {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(45deg, #f4e1c1, #c2a476);
+  top: 20%;
+  left: 10%;
+  box-shadow: 0 0 15px #f4e1c1;
+}
+.saturn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -15px;
+  width: 70px;
+  height: 8px;
+  border: 2px solid #c2a476;
+  border-radius: 50%;
+  transform: rotate(25deg);
+}
+.jupiter {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(45deg, #d9a066, #b8754c);
+  top: 50%;
+  left: 80%;
+  box-shadow: 0 0 20px #d9a066;
+}
+.venus {
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(45deg, #eecda3, #efb59a);
+  top: 70%;
+  left: 30%;
+  box-shadow: 0 0 12px #eecda3;
+}
+.neptune {
+  width: 35px;
+  height: 35px;
+  background: linear-gradient(45deg, #4ca1af, #2c3e50);
+  top: 40%;
+  left: 60%;
+  box-shadow: 0 0 15px #4ca1af;
+}
+
+/* Planet floating variations */
+.planet:nth-child(5) {
+  animation-duration: 18s;
+}
+.planet:nth-child(6) {
+  animation-duration: 22s;
+}
+.planet:nth-child(7) {
+  animation-duration: 20s;
+}
+.planet:nth-child(8) {
+  animation-duration: 24s;
+}
+
+/* ========================
+   Responsive
+======================== */
+@media (max-width: 768px) {
+  .auth-btn-container {
+    top: 10px;
+    right: 10px;
+  }
+
+  .saturn,
+  .jupiter,
+  .venus,
+  .neptune {
+    width: 25px;
+    height: 25px;
+  }
+  .saturn::before {
+    width: 40px;
+    height: 5px;
+    left: -12px;
+  }
+  .jupiter {
+    box-shadow: 0 0 12px #d9a066;
+  }
+  .venus {
+    box-shadow: 0 0 8px #eecda3;
+  }
+  .neptune {
+    box-shadow: 0 0 10px #4ca1af;
   }
 }
