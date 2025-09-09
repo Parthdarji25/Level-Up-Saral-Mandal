@@ -34,9 +34,14 @@ ul {
   flex-direction: column;
   align-items: center;
   padding: 15px 20px;
-  background: linear-gradient(90deg, #1f1c2c, #928dab);
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
-  min-height: 220px;
+  background: linear-gradient(
+    135deg,
+    #3f3cbb,
+    #a78bfa,
+    #c4b5fd
+  ); /* lighter gradient */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); /* softer */
+  min-height: 240px;
   overflow: hidden;
 }
 
@@ -84,7 +89,7 @@ ul {
 
 .side-logo {
   width: 100%;
-  height: 200px;
+  height: 250px;
   object-fit: contain;
 }
 
@@ -101,23 +106,52 @@ ul {
 }
 .center-text h1 {
   margin: 2px 0;
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 700;
-  color: #ffd700;
-  text-shadow: 0 0 8px #ffd700;
+  color: #fff; /* white for contrast */
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.8); /* dark shadow for readability */
 }
+
+/* Fire animation for "Level Up" */
 .center-text h2 {
   margin: 2px 0;
-  font-size: 20px;
-  font-weight: 600;
-  color: #ff4500;
-  text-shadow: 0 0 8px #ff6347;
-  animation: fireText 1.5s infinite alternate;
+  font-size: 26px;
+  font-weight: 700;
+  color: #ffd700; /* golden yellow */
+  text-shadow: 0 0 6px #ffa500, /* orange glow */ 0 0 12px #ffd700,
+    /* yellow glow */ 0 0 18px #ffffff; /* white hot core */
+  animation: fireGlow 1.5s infinite alternate;
 }
+
+/* Yellow-Orange-White fire glow */
+@keyframes fireGlow {
+  0% {
+    text-shadow: 0 0 5px #ffa500, 0 0 10px #ffd700, 0 0 15px #ffffff;
+  }
+  50% {
+    color: #ffd700; /* golden yellow */
+    text-shadow: 0 0 10px #ffd700, 0 0 18px #ffa500, 0 0 25px #ffffff;
+  }
+  100% {
+    color: #ffffff; /* bright white */
+    text-shadow: 0 0 8px #ffd700, 0 0 15px #ffa500, 0 0 30px #ffffff;
+  }
+}
+
+/* Tagline styling */
+.center-text p {
+  margin: 5px 0 0 0;
+  font-size: 18px;
+  color: #ffffff;
+  font-weight: 500;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.7), 0 0 8px rgba(0, 0, 0, 0.6);
+}
+
 .center-text p {
   margin: 0;
   font-size: 16px;
-  color: #fff;
+  color: #f0f0f0; /* softer white */
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
 }
 
 /* Fire animation */
@@ -167,13 +201,13 @@ ul {
   }
 
   .center-text h1 {
-    font-size: 22px;
+    font-size: 20px;
   }
   .center-text h2 {
-    font-size: 18px;
+    font-size: 40px;
   }
   .center-text p {
-    font-size: 14px;
+    font-size: 20px;
   }
 
   /* Auth button stays top-right */
@@ -595,6 +629,12 @@ form button:hover {
   .header {
     flex-direction: column;
     text-align: center;
+    background: linear-gradient(
+      135deg,
+      #5b4b8a,
+      #9d7bf2,
+      #cbbefc
+    ); /* softer mobile gradient */
   }
 
   /* House cards and player activities */
@@ -690,7 +730,7 @@ form button:hover {
   width: 40px;
   height: 40px;
   background: linear-gradient(45deg, #f4e1c1, #c2a476);
-  top: 20%;
+  top: 10%;
   left: 10%;
   box-shadow: 0 0 15px #f4e1c1;
 }
@@ -709,7 +749,7 @@ form button:hover {
   width: 50px;
   height: 50px;
   background: linear-gradient(45deg, #d9a066, #b8754c);
-  top: 50%;
+  top: 70%;
   left: 80%;
   box-shadow: 0 0 20px #d9a066;
 }
@@ -725,7 +765,7 @@ form button:hover {
   width: 35px;
   height: 35px;
   background: linear-gradient(45deg, #4ca1af, #2c3e50);
-  top: 40%;
+  top: 20%;
   left: 60%;
   box-shadow: 0 0 15px #4ca1af;
 }
@@ -777,11 +817,11 @@ form button:hover {
 }
 
 .house-logo {
-  width: 100%;          /* Full width of card */
-  height: auto;         /* Maintain aspect ratio */
-  max-height: 150px;    /* Optional: prevent being too tall */
-  object-fit: cover;    /* Fill the card nicely */
-  border-radius: 12px;  /* Rounded corners */
+  width: 100%; /* Full width of card */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 150px; /* Optional: prevent being too tall */
+  object-fit: cover; /* Fill the card nicely */
+  border-radius: 12px; /* Rounded corners */
   border: 2px solid rgba(255, 255, 255, 0.3); /* soft border */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -793,8 +833,7 @@ form button:hover {
 
 @media (max-width: 768px) {
   .house-logo {
-    max-height: 120px;   /* fit smaller cards */
+    max-height: 120px; /* fit smaller cards */
     border-radius: 10px;
   }
 }
-
