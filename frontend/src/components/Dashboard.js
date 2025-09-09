@@ -16,7 +16,7 @@ export default function Dashboard() {
       {houses.map((house) => (
         <div key={house.name} className="house-card">
           <img
-            src={`/images/${house.name}.png`}
+            src={`/images/${house.name}.jpg`}
             alt={house.name}
             className="house-logo"
           />

@@ -241,7 +241,7 @@ form {
 
 .house-card img,
 .player-activities img {
-  width: 70px;
+  width: 100px;
   margin-bottom: 8px;
 }
 
@@ -775,3 +775,26 @@ form button:hover {
     box-shadow: 0 0 10px #4ca1af;
   }
 }
+
+.house-logo {
+  width: 100%;          /* Full width of card */
+  height: auto;         /* Maintain aspect ratio */
+  max-height: 150px;    /* Optional: prevent being too tall */
+  object-fit: cover;    /* Fill the card nicely */
+  border-radius: 12px;  /* Rounded corners */
+  border: 2px solid rgba(255, 255, 255, 0.3); /* soft border */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.house-card:hover .house-logo {
+  transform: scale(1.05); /* gentle hover effect */
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+  .house-logo {
+    max-height: 120px;   /* fit smaller cards */
+    border-radius: 10px;
+  }
+}
+
