@@ -70,15 +70,54 @@ ul {
 /* ========================
    Header Content
 ======================== */
+
+/* ========================
+   Header & Login Button
+======================== */
+.header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 20px;
+  min-height: 240px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #3f3cbb, #a78bfa, #c4b5fd); /* fallback */
+}
+
+.auth-btn-container {
+  position: absolute; /* keep at top-right */
+  top: 15px;
+  right: 20px;
+  z-index: 999;
+}
+
+.login-btn {
+  background: linear-gradient(135deg, #f7971e, #ffd200);
+  color: #000;
+  font-weight: bold;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.login-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.5);
+}
+
+/* ========================
+   Header Content (Logos + Text)
+======================== */
 .header-content {
   position: relative;
-  z-index: 5;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Logo row */
 .logo-row {
   display: flex;
   align-items: center;
@@ -99,105 +138,92 @@ ul {
   object-fit: contain;
 }
 
-/* Center text */
 .center-text {
   text-align: center;
-  margin-top: 5px;
+  margin-top: 0px;
 }
+
 .center-text h1 {
   margin: 2px 0;
   font-size: 32px;
   font-weight: 700;
-  color: #fff; /* white for contrast */
-  text-shadow: 0 0 6px rgba(0, 0, 0, 0.8); /* dark shadow for readability */
+  color: #fff;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
 }
 
-/* Fire animation for "Level Up" */
 .center-text h2 {
   margin: 2px 0;
   font-size: 26px;
   font-weight: 700;
-  color: #ffd700; /* golden yellow */
-  text-shadow: 0 0 6px #ffa500, /* orange glow */ 0 0 12px #ffd700,
-    /* yellow glow */ 0 0 18px #ffffff; /* white hot core */
+  color: #ffd700;
+  text-shadow: 0 0 6px #ffa500, 0 0 12px #ffd700, 0 0 18px #ffffff;
   animation: fireGlow 1.5s infinite alternate;
 }
 
-/* Yellow-Orange-White fire glow */
 @keyframes fireGlow {
   0% {
     text-shadow: 0 0 5px #ffa500, 0 0 10px #ffd700, 0 0 15px #ffffff;
   }
   50% {
-    color: #ffd700; /* golden yellow */
+    color: #ffd700;
     text-shadow: 0 0 10px #ffd700, 0 0 18px #ffa500, 0 0 25px #ffffff;
   }
   100% {
-    color: #ffffff; /* bright white */
+    color: #ffffff;
     text-shadow: 0 0 8px #ffd700, 0 0 15px #ffa500, 0 0 30px #ffffff;
   }
-}
-
-/* Tagline styling */
-.center-text p {
-  margin: 5px 0 0 0;
-  font-size: 18px;
-  color: #ffffff;
-  font-weight: 500;
-  text-shadow: 0 0 4px rgba(0, 0, 0, 0.7), 0 0 8px rgba(0, 0, 0, 0.6);
 }
 
 .center-text p {
   margin: 0;
   font-size: 16px;
-  color: #f0f0f0; /* softer white */
+  color: #f0f0f0;
   text-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
 }
 
-/* Fire animation */
-@keyframes fireText {
-  0% {
-    color: #ff6347;
-    text-shadow: 0 0 5px #ff4500, 0 0 10px #ff6347;
-  }
-  50% {
-    color: #ff4500;
-    text-shadow: 0 0 10px #ff6347, 0 0 15px #ff4500;
-  }
-  100% {
-    color: #ff6347;
-    text-shadow: 0 0 15px #ff6347, 0 0 20px #ff4500;
-  }
-}
 /* ========================
-   Responsive Design (Mobile)
+   Background Video & Overlay
+======================== */
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 20, 40, 0.6);
+  z-index: 1;
+}
+
+/* ========================
+   Responsive (Mobile)
 ======================== */
 @media (max-width: 768px) {
-  /* Make all logos in one row */
   .logo-row {
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-    margin-bottom: -25px;
     gap: 10px;
+    margin-bottom: -25px;
     padding: 0 20px;
   }
 
   .side-logo {
-    width: 100%;
-    height: 250px;
-    object-fit: contain;
+    height: 260px;
   }
-
   .main-logo {
     width: 100px;
     height: 100px;
-    object-fit: contain;
-  }
-
-  /* Center text below main logo */
-  .center-text {
-    margin-top: 5px;
   }
 
   .center-text h1 {
@@ -210,7 +236,6 @@ ul {
     font-size: 20px;
   }
 
-  /* Auth button stays top-right */
   .auth-btn-container {
     top: 10px;
     right: 10px;
@@ -836,4 +861,29 @@ form button:hover {
     max-height: 120px; /* fit smaller cards */
     border-radius: 10px;
   }
+}
+
+/* ========================
+   Background Video
+======================== */
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* fills screen without distortion */
+  z-index: 0;
+  pointer-events: none; /* so clicks go through */
+}
+
+/* Dark overlay for readability */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 20, 40, 0.6); /* adjust darkness */
+  z-index: 1;
 }
